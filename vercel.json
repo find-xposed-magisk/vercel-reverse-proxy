@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/proxy/(.*)", "destination": "https://$1" },
-    { "source": "/httpproxy/(.*)", "destination": "http://$1" }
+    { "source": "/proxy/(.*)", "destination": "/api/proxy?scheme=https&target=$1" },
+    { "source": "/httpproxy/(.*)", "destination": "/api/proxy?scheme=http&target=$1" }
   ]
 }
