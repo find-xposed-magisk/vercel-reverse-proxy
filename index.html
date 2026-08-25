@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="network-booster 反向代理入口页" />
+    <title>network-booster</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07111f;
+        --panel: rgba(10, 18, 32, 0.88);
+        --panel-2: rgba(14, 25, 43, 0.96);
+        --text: #eaf2ff;
+        --muted: #a8b6cc;
+        --line: rgba(139, 170, 214, 0.2);
+        --accent: #66e3ff;
+        --accent-2: #7c8cff;
+        --good: #7ef0b3;
+        --shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+        --radius: 18px;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(102, 227, 255, 0.14), transparent 34%),
+          radial-gradient(circle at 85% 18%, rgba(124, 140, 255, 0.16), transparent 28%),
+          linear-gradient(180deg, #07111f 0%, #050a13 100%);
+      }
+
+      .wrap {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 32px 20px;
+      }
+
+      .shell {
+        width: min(960px, 100%);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(11, 20, 36, 0.92), rgba(8, 14, 26, 0.96));
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .brand {
+        display: grid;
+        gap: 6px;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .brand p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 60ch;
+        line-height: 1.7;
+      }
+
+      .badge {
+        align-self: start;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(126, 240, 179, 0.28);
+        background: rgba(126, 240, 179, 0.08);
+        color: var(--good);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+        padding: 22px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        padding: 20px;
+      }
+
+      .card h2 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+
+      .list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .list li {
+        display: grid;
+        gap: 4px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: var(--panel-2);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .value {
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .actions {
+        display: grid;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 46px;
+        padding: 0 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(102, 227, 255, 0.24);
+        background: linear-gradient(180deg, rgba(102, 227, 255, 0.18), rgba(124, 140, 255, 0.12));
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .btn.secondary {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      code {
+        padding: 2px 6px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #d9f6ff;
+      }
+
+      .note {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 760px) {
+        .content { grid-template-columns: 1fr; }
+        .topbar { flex-direction: column; }
+        .badge { width: fit-content; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="shell" aria-label="network-booster 入口页">
+        <header class="topbar">
+          <div class="brand">
+            <h1>network-booster</h1>
+            <p>这是一个 Vercel 反向代理项目。根路径现在会显示这个入口页，代理功能仍然通过 `/proxy/` 和 `/httpproxy/` 使用。</p>
+          </div>
+          <div class="badge">Production Ready</div>
+        </header>
+
+        <div class="content">
+          <section class="card">
+            <h2>使用方式</h2>
+            <ul class="list">
+              <li>
+                <span class="label">HTTPS 代理</span>
+                <span class="value"><code>/proxy/目标域名/路径</code></span>
+              </li>
+              <li>
+                <span class="label">HTTP 代理</span>
+                <span class="value"><code>/httpproxy/目标域名/路径</code></span>
+              </li>
+              <li>
+                <span class="label">示例</span>
+                <span class="value"><code>/proxy/raw.githubusercontent.com/gaboolic/vercel-reverse-proxy/main/vercel.json</code></span>
+              </li>
+            </ul>
+          </section>
+
+          <aside class="card">
+            <h2>快捷入口</h2>
+            <div class="actions">
+              <a class="btn" href="/proxy/raw.githubusercontent.com/gaboolic/vercel-reverse-proxy/main/vercel.json">打开示例代理</a>
+              <a class="btn secondary" href="/proxy/api.openai.com/v1">OpenAI 代理示例</a>
+            </div>
+            <p class="note">如果你只是测试域名是否连通，先看这个页面；如果要真正代理请求，请直接访问对应的代理路径。</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </body>
+  </html>
